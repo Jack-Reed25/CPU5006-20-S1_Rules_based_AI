@@ -19,3 +19,17 @@ for column in ["Saving account", "Checking account"]:
 
 # this counts all of the good and bad values in the Risk colun
 print(df["Risk"].value_counts())
+
+
+credit_risk_rules = [
+
+#this gives a lable of "balance=low" to checking or savings accounts that have a value of none, little, or moderate.
+# check if non in the checking or savings account columns was actually a negative in the data.
+        ({"checking=none"}, "checking=low"),
+        ({"checking=little"}, "checking=low"),
+        ({"checking=moderate"}, "checking=low"),
+        ({"savings=none"}, "savings=low"),
+        ({"savings=little"}, "savings=low"),
+        ({"savings=moderate"}, "savings=low"),
+
+]
