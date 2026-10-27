@@ -15,4 +15,7 @@ test_df = pd.read_csv("test_data.csv")
 for column in ["Saving account", "Checking account"]:
     df[column] = df[column].fillna("none")
     test_df[column] = test_df[column].fillna("none")
-    
+
+
+# this counts all of the good and bad values in the Risk colun
+print(df["Risk"].value_counts())
