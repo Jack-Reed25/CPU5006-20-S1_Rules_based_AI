@@ -21,6 +21,16 @@ for column in ["Saving account", "Checking account"]:
 print(df["Risk"].value_counts())
 
 
+
+
+
+# this takes the data from the checking and savings accounts columns in the .csv files and holds them as facts
+def row_to_facts(row):
+    facts = set()
+    facts.add(f"checking={row['Checking account']}")
+    facts.add(f"savings={row['Saving account']}")
+    return facts
+
 credit_risk_rules = [
 
 #this gives a lable of "balance=low" to checking or savings accounts that have a value of none, little, or moderate.
@@ -31,5 +41,7 @@ credit_risk_rules = [
         ({"savings=none"}, "savings=low"),
         ({"savings=little"}, "savings=low"),
         ({"savings=moderate"}, "savings=low"),
+
+
 
 ]
