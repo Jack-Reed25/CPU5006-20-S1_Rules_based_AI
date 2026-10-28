@@ -127,3 +127,11 @@ shuffled = rows[:]
 random.shuffle(shuffled)
 cut = int(.7 * len(shuffled))
 train, test = shuffled[:cut], shuffled[cut:]
+
+
+
+# from session 3 resources
+# guesses the most common answer and provides a baseline my rules need to beat
+majority = Counter(r["Risk"] for r in train).most_common(1)[0][0]
+baseline = sum(r["Risk"] == majority for r in test) / len(test)
+print(f"Always predict {majority!r}: {baseline:.2f}")
