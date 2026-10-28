@@ -24,13 +24,15 @@ print(df["Risk"].value_counts())
 
 
 
-# this takes the data from the housing, purpose, checking and savings accounts columns in the .csv files and holds them as facts
+# this takes the data from the housing, purpose, loan length, checking and savings accounts columns in the .csv files and holds them as facts
 def row_to_facts(row):
     facts = set()
     facts.add(f"checking={row['Checking account']}")
     facts.add(f"savings={row['Saving account']}")
     facts.add(f"housing={row['Housing']}")
     facts.add(f"purpose={row['Purpose']}")
+    facts.add("loan=short" if row['Duration'] <=12 else "loan=long")
+
     return facts
 
 credit_risk_rules = [
