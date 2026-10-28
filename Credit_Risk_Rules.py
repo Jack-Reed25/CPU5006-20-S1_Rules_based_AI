@@ -114,3 +114,16 @@ def classify_forward(row):
 def classify_backward(row):
     proved = backward_chain("risk=bad", row_to_facts(row), credit_risk_rules)
     return "bad" if proved else "good"
+
+
+# from session 3 resources
+# converts the table into a list of rows
+rows = df.to_dict("records")
+
+# from session 3 resources
+# splits training data 70%/30% to design rules (70%) then tests them (30%)
+random.seed(42)
+shuffled = rows[:]
+random.shuffle(shuffled)
+cut = int(.7 * len(shuffled))
+train, test = shuffled[:cut], shuffled[cut:]
