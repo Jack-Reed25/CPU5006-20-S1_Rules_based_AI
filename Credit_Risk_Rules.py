@@ -70,4 +70,14 @@ credit_risk_rules = [
     ({"purpose=furniture/equipment"}, "purpose_type=risky"),
     ({"purpose=domestic appliances"}, "purpose_type=risky"),
 
+#tries to organise people if they are bad risk
+    ({"money=low", "loan=long"}, "risk=bad"),
+    ({"money=low", "purpose_type=risky"}, "risk=bad"),
+    ({"money=low", "history=thin"}, "risk=bad"),
+
+# in the training data people who rent or are free for housing were more likely to be bad risk
+    ({"money=low","housing=rent"}, "risk=bad"),
+    ({"money=low","housing=free"}, "risk=bad"),
+    ({"exposure=high"}, "risk=bad"),
+    ({"checking=little", "loan=long"}, "risk=bad"),
 ]
