@@ -53,6 +53,21 @@ credit_risk_rules = [
     ({"savings=little"}, "savings=low"),
     ({"savings=moderate"}, "savings=low"),
 
+    ({"checking=low", "savings=low"}, "money=low"),
 
+# this gives a label of "exposure=high" to loans that are long with a high credit amount and a label of "history=thin" to young people who rent
+    ({"loan=long", "credit=high"}, "exposure=high"),
+    ({"age=young", "housing=rent"}, "history=thin"),
+
+
+# These are placeholders, look in to whether different purposes had different correlations with being bad vs good
+    ({"purpose=education"}, "purpose_type=risky"),
+    ({"purpose=repairs"},  "purpose_type=risky"),
+    ({"purpose=business"}, "purpose_type=risky"),
+    ({"purpose=vacation/others"}, "purpose_type=risky"),
+    ({"purpose=car"}, "purpose_type=risky"),
+    ({"purpose=radio/TV"},  "purpose_type=risky"),
+    ({"purpose=furniture/equipment"}, "purpose_type=risky"),
+    ({"purpose=domestic appliances"}, "purpose_type=risky"),
 
 ]
