@@ -10,7 +10,6 @@ df = pd.read_csv("training_data.csv")
 test_df = pd.read_csv("test_data.csv")
 
 
-
 # this tells the program to fill in any missing data in the Saving account and Checking account columns with "none" in both the training and testing CSV files.
 for column in ["Saving account", "Checking account"]:
     df[column] = df[column].fillna("none")
@@ -19,9 +18,6 @@ for column in ["Saving account", "Checking account"]:
 
 # this counts all of the good and bad values in the Risk column
 print(df["Risk"].value_counts())
-
-
-
 
 
 # this takes the data from the housing, purpose, loan length, checking and savings accounts columns in the .csv files and holds them as facts
@@ -42,6 +38,8 @@ def row_to_facts(row):
 
     return facts
 
+
+# based on code format from session 3 resources 
 credit_risk_rules = [
 
 # this gives a label of "checking/savings=low" to checking or savings accounts that have a value of none, little, or moderate.
@@ -81,3 +79,16 @@ credit_risk_rules = [
     ({"exposure=high"}, "risk=bad"),
     ({"checking=little", "loan=long"}, "risk=bad"),
 ]
+
+# from session 3 resources
+# uses forward chaining to help the program decide if risk is good or bad
+def forward_chain(facts, rules):
+    known = set(facts)
+    changed = True
+    while changed:
+        changed = False
+        for conditions, conclusion in rules:
+            if conditions <= known and conclusion not in known:
+                known.add(conclusion)
+                changed = True
+    return known
