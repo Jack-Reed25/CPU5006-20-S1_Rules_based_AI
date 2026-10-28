@@ -92,3 +92,16 @@ def forward_chain(facts, rules):
                 known.add(conclusion)
                 changed = True
     return known
+
+# from session 3 resources
+# uses backward chaining to help the program decide if someone is a bad risk by looking at the risk and if the data proves it 
+def backward_chain(goal, facts, rules):
+    if goal in facts:
+        return True
+    for conditions, conclusion in rules:
+        if conclusion == goal:
+            if all(backward_chain(c, facts, rules) for c in sorted(conditions)):
+                return True
+    return False
+
+
