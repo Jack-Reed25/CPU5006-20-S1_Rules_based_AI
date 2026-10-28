@@ -17,30 +17,32 @@ for column in ["Saving account", "Checking account"]:
     test_df[column] = test_df[column].fillna("none")
 
 
-# this counts all of the good and bad values in the Risk colun
+# this counts all of the good and bad values in the Risk column
 print(df["Risk"].value_counts())
 
 
 
 
 
-# this takes the data from the checking and savings accounts columns in the .csv files and holds them as facts
+# this takes the data from the housing, purpose, checking and savings accounts columns in the .csv files and holds them as facts
 def row_to_facts(row):
     facts = set()
     facts.add(f"checking={row['Checking account']}")
     facts.add(f"savings={row['Saving account']}")
+    facts.add(f"housing={row['Housing']}")
+    facts.add(f"purpose={row['Purpose']}")
     return facts
 
 credit_risk_rules = [
 
-#this gives a lable of "balance=low" to checking or savings accounts that have a value of none, little, or moderate.
-# check if non in the checking or savings account columns was actually a negative in the data.
-        ({"checking=none"}, "checking=low"),
-        ({"checking=little"}, "checking=low"),
-        ({"checking=moderate"}, "checking=low"),
-        ({"savings=none"}, "savings=low"),
-        ({"savings=little"}, "savings=low"),
-        ({"savings=moderate"}, "savings=low"),
+# this gives a label of "checking/savings=low" to checking or savings accounts that have a value of none, little, or moderate.
+# check if none in the checking or savings account columns was actually a negative in the data, not just unfilled info.
+    ({"checking=none"}, "checking=low"),
+    ({"checking=little"}, "checking=low"),
+    ({"checking=moderate"}, "checking=low"),
+    ({"savings=none"}, "savings=low"),
+    ({"savings=little"}, "savings=low"),
+    ({"savings=moderate"}, "savings=low"),
 
 
 
