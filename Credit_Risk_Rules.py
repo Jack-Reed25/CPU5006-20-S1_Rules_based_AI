@@ -31,7 +31,14 @@ def row_to_facts(row):
     facts.add(f"savings={row['Saving account']}")
     facts.add(f"housing={row['Housing']}")
     facts.add(f"purpose={row['Purpose']}")
+
+# check to see if these valuse have a corilation  that changes with specific values instead of just a general division.
     facts.add("loan=short" if row['Duration'] <=12 else "loan=long")
+
+    if row['Credit amount'] > 5000:
+        facts.add("credit=high")
+    if row['Age'] < 30:
+        facts.add("age=young")
 
     return facts
 
