@@ -105,3 +105,12 @@ def backward_chain(goal, facts, rules):
     return False
 
 
+# uses forward chaining to decide good or bad risk, people are good unless risk=bad
+def classify_forward(row):
+    known = forward_chain(row_to_facts(row), credit_risk_rules)
+    return "bad" if "risk=bad" in known else "good"
+
+# uses backward chaining to decide good or bad risk, people are good unless risk=bad
+def classify_backward(row):
+    proved = backward_chain("risk=bad", row_to_facts(row), credit_risk_rules)
+    return "bad" if proved else "good"
