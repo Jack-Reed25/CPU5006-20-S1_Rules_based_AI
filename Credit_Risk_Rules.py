@@ -12,7 +12,7 @@ test_df = pd.read_csv("test_data.csv")
 
 
 # this tells the program to fill in any missing data in the Saving account and Checking account columns with "none" in both the training and testing CSV files.
-for column in ["Saving account", "Checking account"]:
+for column in ["Saving accounts", "Checking account"]:
     df[column] = df[column].fillna("none")
     test_df[column] = test_df[column].fillna("none")
 
@@ -25,7 +25,7 @@ print(df["Risk"].value_counts())
 def row_to_facts(row):
     facts = set()
     facts.add(f"checking={row['Checking account']}")
-    facts.add(f"savings={row['Saving account']}")
+    facts.add(f"savings={row['Saving accounts']}")
     facts.add(f"housing={row['Housing']}")
     facts.add(f"purpose={row['Purpose']}")
 
@@ -125,7 +125,11 @@ print(f"Always predict {majority!r}: {baseline:.2f}")
 # compares the programs choices with the answers in test
 y_true = [r["Risk"] for r in test]
 y_pred = [classify(r) for r in test]
-
 print(f"\nAccuracy: {accuracy_score(y_true, y_pred):.2f}")
 print (classification_report(y_true, y_pred, zero_division=0))
 print(confusion_matrix(y_true, y_pred, labels=sorted (set(y_true))))
+
+
+# predicts how many people in the test_data.csv will be good or bad
+predictions = [classify(r) for r in test_df.to_dict("records")]
+print("\nPredictions for the new applicants:", Counter(predictions))
