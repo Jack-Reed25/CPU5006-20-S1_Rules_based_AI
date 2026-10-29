@@ -3,6 +3,7 @@
 import random
 from collections import Counter
 import pandas as pd
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 
 
 # this tells the program to read the csv files and store them in a variable called df and test_df. df has the training data and test_df holds data to be tested.
@@ -93,27 +94,11 @@ def forward_chain(facts, rules):
                 changed = True
     return known
 
-# from session 3 resources
-# uses backward chaining to help the program decide if someone is a bad risk by looking at the risk and if the data proves it 
-def backward_chain(goal, facts, rules):
-    if goal in facts:
-        return True
-    for conditions, conclusion in rules:
-        if conclusion == goal:
-            if all(backward_chain(c, facts, rules) for c in sorted(conditions)):
-                return True
-    return False
-
 
 # uses forward chaining to decide good or bad risk, people are good unless risk=bad
-def classify_forward(row):
+def classify(row):
     known = forward_chain(row_to_facts(row), credit_risk_rules)
     return "bad" if "risk=bad" in known else "good"
-
-# uses backward chaining to decide good or bad risk, people are good unless risk=bad
-def classify_backward(row):
-    proved = backward_chain("risk=bad", row_to_facts(row), credit_risk_rules)
-    return "bad" if proved else "good"
 
 
 # from session 3 resources
@@ -129,9 +114,18 @@ cut = int(.7 * len(shuffled))
 train, test = shuffled[:cut], shuffled[cut:]
 
 
-
 # from session 3 resources
 # guesses the most common answer and provides a baseline my rules need to beat
 majority = Counter(r["Risk"] for r in train).most_common(1)[0][0]
 baseline = sum(r["Risk"] == majority for r in test) / len(test)
 print(f"Always predict {majority!r}: {baseline:.2f}")
+
+
+# from session 3 resources
+# compares the programs choices with the answers in test
+y_true = [r["Risk"] for r in test]
+y_pred = [classify(r) for r in test]
+
+print(f"\nAccuracy: {accuracy_score(y_true, y_pred):.2f}")
+print (classification_report(y_true, y_pred, zero_division=0))
+print(confusion_matrix(y_true, y_pred, labels=sorted (set(y_true))))
