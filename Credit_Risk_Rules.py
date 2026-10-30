@@ -32,34 +32,35 @@ def row_to_facts(row):
 
     return facts
 
-
+new
 credit_risk_rules = [
 
-# this gives a label of "checking/savings=low" to checking or savings accounts that have a value of little, or moderate.
+    # this gives a label of "checking/savings=low" to checking or savings accounts that have a value of little, or moderate.
     ({"checking=little"}, "checking=low"),
     ({"checking=moderate"}, "checking=low"),
     ({"savings=little"}, "savings=low"),
     ({"savings=moderate"}, "savings=low"),
     ({"checking=low", "savings=low"}, "money=low"),
 
-# this gives a label of "exposure=high" to loans that are long with a high credit amount
+    # this gives a label of "exposure=high" to loans that are long with a high credit amount
     ({"loan=long", "credit=high"}, "exposure=high"),
 
-# these purposes had higher bad rates in the training data, so they're labelled risky
+    # these purposes had higher bad rates in the training data, so they're labelled risky
     ({"purpose=education"}, "purpose_type=risky"),
     ({"purpose=repairs"},  "purpose_type=risky"),
     ({"purpose=vacation/others"}, "purpose_type=risky"),
 
-#tries to organise people if they are bad risk
+    #tries to organise people if they are bad risk
     ({"money=low", "loan=long"}, "risk=bad"),
     ({"money=low", "purpose_type=risky"}, "risk=bad"),
     ({"age=young", "checking=low"}, "risk=bad"),
-
-# in the training data people who rent or are free for housing were more likely to be bad risk
-    ({"money=low","housing=rent"}, "risk=bad"),
-    ({"money=low","housing=free"}, "risk=bad"),
     ({"exposure=high"}, "risk=bad"),
     ({"checking=little", "loan=long"}, "risk=bad"),
+
+
+    # in the training data people who rent or are free for housing were more likely to be bad risk
+    ({"money=low","housing=rent"}, "risk=bad"),
+    ({"money=low","housing=free"}, "risk=bad"),
 ]
 
 
