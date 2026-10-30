@@ -32,7 +32,7 @@ def row_to_facts(row):
 
     return facts
 
-new
+
 credit_risk_rules = [
 
     # this gives a label of "checking/savings=low" to checking or savings accounts that have a value of little, or moderate.
