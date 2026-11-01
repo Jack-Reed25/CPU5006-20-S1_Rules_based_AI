@@ -1,4 +1,3 @@
-
 # these initiate the program by making sure that taken data can be randomized, that the program can count the data, and that the program can read the csv files.
 import random
 from collections import Counter
@@ -42,9 +41,6 @@ credit_risk_rules = [
     ({"savings=moderate"}, "savings=low"),
     ({"checking=low", "savings=low"}, "money=low"),
 
-    # this gives a label of "exposure=high" to loans that are long with a high credit amount
-    ({"loan=long", "credit=high"}, "exposure=high"),
-
     # these purposes had higher bad rates in the training data, so they're labelled risky
     ({"purpose=education"}, "purpose_type=risky"),
     ({"purpose=repairs"},  "purpose_type=risky"),
@@ -54,9 +50,8 @@ credit_risk_rules = [
     ({"money=low", "loan=long"}, "risk=bad"),
     ({"money=low", "purpose_type=risky"}, "risk=bad"),
     ({"age=young", "checking=low"}, "risk=bad"),
-    ({"exposure=high"}, "risk=bad"),
+    ({"loan=long", "credit=high"}, "risk=bad"),
     ({"checking=little", "loan=long"}, "risk=bad"),
-
 
     # in the training data people who rent or are free for housing were more likely to be bad risk
     ({"money=low","housing=rent"}, "risk=bad"),
