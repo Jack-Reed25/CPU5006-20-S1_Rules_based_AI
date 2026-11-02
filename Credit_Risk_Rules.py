@@ -21,6 +21,7 @@ def row_to_facts(row):
     facts.add(f"housing={row['Housing']}")
     facts.add(f"purpose={row['Purpose']}")
 
+
 # loans of 12 months or less are short, anything longer is long
     facts.add("loan=short" if row['Duration'] <=12 else "loan=long")
 
