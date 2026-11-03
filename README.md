@@ -23,5 +23,5 @@ python Credit_Risk_Rules.py
 the program uses `random.seed(42)` to pseudo-randomise the data so the results stay the same every time 
 
 ## Results 
-- the results achieved was a 70% accuracy compared with a baseline of 49% of 336 entries 
+- the result achieved was a 70% accuracy compared with a baseline of 49% of 336 entries 
 
