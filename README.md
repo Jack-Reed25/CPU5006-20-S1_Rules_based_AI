@@ -4,7 +4,6 @@ Repository for S1 student submission for a rule based AI solution
 
 ## Rule Based AI Credit Risk Checker 
 
-A rule based AI that uses Rules and forward chaining to decide if someone is a good or bad risk with credit
 A rule based AI that uses Rules and forward chaining to predict if a given loan would be a "bad" credit risk.
 
 ## the files used
